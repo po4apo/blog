@@ -1,12 +1,15 @@
 from django.db import models
 
+# from post.utils import create_slug
+
+
 class Category(models.Model):
     name = models.CharField(max_length=100,
                             unique=True,
-                            verbose_name = 'Название'
+                            verbose_name='Название'
                             )
-    description = models.TextField(verbose_name = 'Описание',
-                                   null=True,
+    description = models.TextField(verbose_name='Описание',
+                                   blank=True,
                                    )
 
     def __str__(self):
@@ -17,41 +20,46 @@ class Category(models.Model):
         verbose_name_plural = 'Категории'
 
 
+
+
 class Post(models.Model):
     title = models.CharField(max_length=250,
                              verbose_name='Заголовок',
                              )
-    body = models.TextField(verbose_name = 'Текст публикации',
-                             )
+    body = models.TextField(verbose_name='Текст публикации',
+                            )
     publishedDate = models.DateField(auto_now_add=True,
                                      verbose_name='Дата публикации',
                                      )
-    enable = models.BooleanField(verbose_name = 'Открытость',
-                             )
-    commentsEnable = models.BooleanField()
+    enable = models.BooleanField(verbose_name='Показать пост',
+                                 )
+    commentsEnable = models.BooleanField(verbose_name='Включить комментарии',
+                                         )
     category = models.ForeignKey('Category',
                                  on_delete=models.SET_NULL,
                                  null=True,
                                  verbose_name='Категория',
                                  )
-    slug=models.CharField(max_length=250,
-                          unique=True,
-                          verbose_name='Слаг',
-                          )
-    shortDescription = models.TextField(verbose_name = 'Краткое описание',
-                             )
-
+    # todo: add func for generate slug
+    slug = models.CharField(max_length=250,
+                            blank=True,
+                            unique=True,
+                            verbose_name='Слаг',
+                            )
+    shortDescription = models.TextField(verbose_name='Краткое описание',
+                                        )
 
     def __str__(self):
         return self.title
-
 
     class Meta:
         verbose_name = 'Публикация'
         verbose_name_plural = 'Публикации'
 
-
-
+    # def save(self, *args, **kwargs):
+    #     if not self.slug:
+    #         self.slug = create_slug(self.title)
+    #     super().save(*args, **kwargs)
 
 class Coment(models.Model):
     post = models.ForeignKey('Post',
@@ -63,9 +71,8 @@ class Coment(models.Model):
                                 verbose_name='Имя пользователя',
 
                                 )
-    body = models.TextField(verbose_name = 'Комментарий',
-                             )
-
+    body = models.TextField(verbose_name='Комментарий',
+                            )
 
     class Meta:
         verbose_name = "Комментарий"
@@ -73,9 +80,3 @@ class Coment(models.Model):
 
     def __str__(self):
         return self.body
-
-
-
-
-
-
