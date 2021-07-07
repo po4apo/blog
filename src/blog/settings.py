@@ -38,8 +38,32 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'post',
+    'ckeditor',
+    'menu'
+
 ]
 
+
+
+#Настройки для отображения изображений
+
+_PATH = os.path.abspath(os.path.dirname(__file__))
+
+MEDIA_ROOT = os.path.join(_PATH, 'files', 'media')
+MEDIA_URL = '/media/'
+
+STATIC_ROOT = os.path.join(_PATH, 'files', 'static')
+STATIC_URL = '/static/'
+STATICFILES_DIRS = (
+    os.path.join(_PATH, 'static'),
+)
+STATICFILES_FINDERS = (
+    'django.contrib.staticfiles.finders.FileSystemFinder',
+    'django.contrib.staticfiles.finders.AppDirectoriesFinder',
+)
+
+ADMIN_MEDIA_PREFIX = '/static/admin/'
+##################################################################################
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -63,6 +87,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'django.template.context_processors.request'
             ],
         },
     },
