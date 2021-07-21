@@ -8,13 +8,13 @@
             </div>
             <div class="card-body">
                 <h5 class="card-title">
-                <a class="link-dark" href="{%url 'post' obj.slug%}">
-                    {{ obj.title }}
+                    <a class="link-dark" href="{% url 'post' obj.slug %}">
+                        {{ obj.title }}
 
 
-                </a>
+                    </a>
                 </h5>
-            <p class="card-text">{{ obj.shortDescription }}</p>
+                <p class="card-text">{{ obj.shortDescription }}</p>
             </div>
         </div>
     {% endfor %}
