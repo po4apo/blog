@@ -1,13 +1,17 @@
+from django.core.paginator import Paginator
 from django.shortcuts import render, get_object_or_404
 from post.models import Post
 
 
-def main(requests):
+def main(request):
     qs = Post.objects.all()
-    print(requests.path)
-    objects_list = {'posts': qs,
-                    }
-    return render(requests, 'post/feed.html', objects_list)
+    paginator = Paginator(qs, 1)
+
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
+
+    objects_list = {'posts': page_obj, }
+    return render(request, 'post/feed.html', objects_list)
 
 
 def show_post(requests, post_slug):
@@ -21,5 +25,4 @@ def show_projects(requests):
 
 def show_about(requests):
     objects_list = {}
-    # pogination = Paginator(qs, 1)
     return render(requests, 'post/feed.html', objects_list)
