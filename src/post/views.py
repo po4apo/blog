@@ -5,7 +5,7 @@ from post.models import Post
 
 def main(request):
     qs = Post.objects.all()
-    paginator = Paginator(qs, 1)
+    paginator = Paginator(qs, 4)
 
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)
@@ -23,6 +23,3 @@ def show_projects(requests):
     return render(requests, 'post/feed.html')
 
 
-def show_about(requests):
-    objects_list = {}
-    return render(requests, 'post/feed.html', objects_list)
