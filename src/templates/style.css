@@ -1,0 +1,42 @@
+
+
+#document { 
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+main {
+  flex: auto;
+}
+
+footer {
+    flex-shrink: 0;
+}
+
+body {
+    color: bisque;
+}
+
+/* Other styling elements, that are not necessary for the example */
+
+* {
+  margin: 0;
+  font-family: Candara;
+}
+
+h1, p {
+  padding: 20px;
+}
+
+footer {
+  color: white;
+  background-position: center; 
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+footer > h1 {
+  text-shadow: 1px 1px 4px #00000080;
+}
+

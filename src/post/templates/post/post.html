@@ -1,12 +1,40 @@
 {% extends "main.html" %}
 
-{% block title%}
-{{ objects_list.title }}
+{% block title %}
+    {{ objects_list.title }}
 {% endblock %}
 
 {% block content %}
 
     <h1>{{ objects_list.title }}</h1>
     {{ objects_list.body | safe }}
+    <form method="POST" class="border rounded p-3 pb-2 mb-2">
+        {% csrf_token %}
+        {{ form }}
+        <button type = "submit"  class="save btn btn-light border offset-md-11">
+            <span>Сохранить</span>
+        </button>
+    </form>
+    <div class="border rounded p-3 pb-0 mb-3">
+    {% if com %}
+    {% for comment in com %}
+        <figure>
+            <blockquote class="blockquote">
+                <p>{{comment.userName}}</p>
+            </blockquote>
+            <figcaption class="blockquote-footer">
+                {{comment.postDate}}
+            </figcaption>
+            <blockquote class="blockquote">
+                <p>{{ comment.body }}</p>
+            </blockquote>
+            <hr>
+        </figure>
+    {% endfor  %}
+    {% else %}
+    <p class="p-3">Тут может быть ваш комментарий</p>
+    {% endif %}
+    </div>
 
 {% endblock %}
+

@@ -102,6 +102,8 @@ class Coment(models.Model):
                                 )
     body = models.TextField(verbose_name='Комментарий',
                             )
+    postDate = models.DateTimeField(verbose_name='Дата публикации',
+                                )
 
     class Meta:
         verbose_name = "Комментарий"

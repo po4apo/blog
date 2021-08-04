@@ -37,29 +37,19 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'post',
     'ckeditor',
-    'menu'
+    'menu',
+    'aboutme'
 
 ]
 
-# Настройки для отображения изображений
-
-_PATH = os.path.abspath(os.path.dirname(__file__))
-
-MEDIA_ROOT = os.path.join(_PATH, 'files', 'media')
-MEDIA_URL = '/media/'
-
-STATIC_ROOT = os.path.join(_PATH, 'files', 'static')
+# Ссылка, по которой статика будет доступна на веб-странице
 STATIC_URL = '/static/'
+
+# Папка на сервере, в которой будет храниться статика
 STATICFILES_DIRS = (
-    os.path.join(_PATH, 'static'),
-)
-STATICFILES_FINDERS = (
-    'django.contrib.staticfiles.finders.FileSystemFinder',
-    'django.contrib.staticfiles.finders.AppDirectoriesFinder',
+    os.path.join(BASE_DIR, 'static'),
 )
 
-ADMIN_MEDIA_PREFIX = '/static/admin/'
-##################################################################################
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -135,9 +125,11 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
 
-STATIC_URL = '/static/'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 
+# Для работы с файлами и изображениями
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
